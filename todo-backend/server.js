@@ -5,6 +5,13 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
+const {
+  getTodos,
+  createTodo,
+  updateTodo,
+  deleteTodo,
+} = require("./controllers/todoController");
+
 // App config
 
 const app = express();
@@ -32,3 +39,19 @@ mongoose
     console.log(error);
   });
 // API Endpoints
+
+// Get Todos list
+
+app.get("/todos", getTodos);
+
+// Create a new todo
+
+app.post("/todos", createTodo);
+
+// Update a todo
+
+app.put("/todos/:id", updateTodo);
+
+// Delete a todo
+
+app.delete("/todos/:id", deleteTodo);
