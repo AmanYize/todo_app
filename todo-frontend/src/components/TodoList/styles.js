@@ -17,17 +17,22 @@ export const Row = styled.li`
   }
 `;
 
-export const Text = styled.span`
+// Ensure `isCompleted` is not forwarded to the DOM
+export const Text = styled.span.withConfig({
+  shouldForwardProp: (prop) => prop !== "isCompleted",
+})`
   ::first-letter {
     text-transform: capitalize;
   }
   flex: 1;
   margin-left: 8px;
   font-size: 1.2rem;
-  color: ${(props) => (props.isCompleted ? "#57cc99" : "#333")};
-  text-decoration: ${(props) => (props.isCompleted ? "line-through" : "none")};
+  color: ${({ isCompleted }) => (isCompleted ? "#57cc99" : "#333")};
+  text-decoration: ${({ isCompleted }) =>
+    isCompleted ? "line-through" : "none"};
 `;
 
+// DeleteIcon inherits styles from Text
 export const DeleteIcon = styled(Text)`
   cursor: pointer;
 `;

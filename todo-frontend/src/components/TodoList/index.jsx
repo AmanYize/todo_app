@@ -5,9 +5,10 @@ function TodoList({ todos, fetchData }) {
   console.log(todos, "hi");
 
   const updateTodo = async (id) => {
+    const todo = todos.find((t) => t._id === id); // Find the todo by ID
     try {
       const response = await axios.put(`/todos/${id}`, {
-        id,
+        completed: !todo.completed, // Toggle completed status
       });
       fetchData();
     } catch (err) {
