@@ -5,12 +5,14 @@ import axios from "../../axios";
 import TodoList from "../TodoList";
 import Key from "../Key";
 import Author from "../Author";
+
 function Todo() {
+  const BASE_URL = "https://todo-app-q096.onrender.com";
   const [input, setInput] = useState("");
   const [todos, setTodos] = useState([]);
   const fetchData = async () => {
     try {
-      const response = await axios.get("/todos");
+      const response = await axios.get(`${BASE_URL}/todos`);
       setTodos(response.data);
     } catch (err) {
       console.log(err);
@@ -26,7 +28,9 @@ function Todo() {
     if (input.length === 0) {
       return null;
     }
-    await axios.post("/todos", [{ ...todos, text: input, completed: false }]);
+    await axios.post(`${BASE_URL}/todos`, [
+      { ...todos, text: input, completed: false },
+    ]);
     fetchData();
     setInput("");
   };

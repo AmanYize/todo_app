@@ -3,11 +3,11 @@ import { ListContainer, Row, Text, DeleteIcon } from "./styles";
 import axios from "../../axios";
 function TodoList({ todos, fetchData }) {
   console.log(todos, "hi");
-
+  const BASE_URL = "https://todo-app-q096.onrender.com";
   const updateTodo = async (id) => {
     const todo = todos.find((t) => t._id === id); // Find the todo by ID
     try {
-      const response = await axios.put(`/todos/${id}`, {
+      const response = await axios.put(`${BASE_URL}/todos/${id}`, {
         completed: !todo.completed, // Toggle completed status
       });
       fetchData();
@@ -18,7 +18,7 @@ function TodoList({ todos, fetchData }) {
 
   const deleteTodo = async (id) => {
     try {
-      const response = await axios.delete(`/todos/${id}`, {
+      const response = await axios.delete(`${BASE_URL}/todos/${id}`, {
         id,
       });
       fetchData();
